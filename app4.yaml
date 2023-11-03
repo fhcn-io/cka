@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app4
+  namespace: prueba
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app4
+  template:
+    metadata:
+      labels:
+        app: app4
+    spec:
+      containers:
+      - image: polinux/stress
+        name: mem-stress
+        args:
+          - --vm
+          - "1"
+          - --vm-bytes
+          - 495M
+          - --vm-hang
+          - "1"
+        command:
+          - stress
